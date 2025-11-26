@@ -26,10 +26,7 @@ O script `stack.py` instala e configura um ecossistema de ferramentas cuidadosam
 ### Pré-requisitos
 
 - **Python 3.10+**
-- **Poetry**: Recomenda-se a instalação via `pipx` para isolamento de pacotes:
-  ```bash
-  pipx install poetry
-  ```
+- **Poetry**: Recomenda-se a instalação via `pipx` para isolamento (`pipx install poetry`). O script verifica automaticamente se ele está disponível.
 
 ### Instalação
 
@@ -52,13 +49,17 @@ O script `stack.py` instala e configura um ecossistema de ferramentas cuidadosam
 
 Pronto! Seu ambiente está configurado e pronto para uso.
 
-## 🛠️ Opções Avançadas (CLI)
+## CLI e Opções Avançadas
 
 O script possui uma interface de linha de comando para dar a você controle total sobre a execução:
 
--   `--dry-run`: Simula a execução completa sem fazer nenhuma alteração real no sistema de arquivos. Perfeito para testar o que o script fará.
--   `--verbose`: Ativa logs detalhados, exibindo cada comando e operação de arquivo que está sendo executada.
--   `--force`: Sobrescreve arquivos de configuração existentes (`.pre-commit-config.yaml`, etc.) **sem criar backups**. Use com cuidado, ideal para ambientes de CI/CD ou quando você tem certeza de que deseja uma configuração limpa.
+-   `--dry-run`: Simula a execução sem alterações.
+-   `--force`: Sobrescreve arquivos de configuração existentes sem criar backup.
+-   `--verbose`: Exibe logs detalhados.
+
+## Desenvolvimento e Testes
+
+O projeto inclui uma suíte de testes própria (`tests/`) e um pipeline de CI que valida o script a cada commit.
 
 ## 🤖 Automação Inteligente
 
