@@ -1,4 +1,4 @@
-# 🐍 Python Elite Stack: Performance, Security & Integrity Bootstrapper
+# 🐍 Python Stack: Performance, Security & Integrity Bootstrapper
 
 Este projeto fornece um script "Zero-to-Hero" que configura um ambiente de desenvolvimento Python completo em segundos. Ele automatiza a instalação e configuração de um conjunto de ferramentas de alta performance, segurança e qualidade, permitindo que você foque apenas em codificar.
 
