@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # Manter dependências do pip (Poetry) atualizadas
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      dev-dependencies:
+        patterns:
+          - "ruff"
+          - "mypy"
+          - "bandit"
+          - "safety"
+          - "pytest"
+          - "pre-commit"
+
+  # Manter GitHub Actions atualizadas
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
