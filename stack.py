@@ -49,7 +49,7 @@ def _is_windows() -> bool:
 
 def _generate_pyproject_config() -> None:
     """Gera e escreve as configurações do Ruff e Mypy no pyproject.toml."""
-    print("📝 Gerando configurações para Ruff e Mypy no pyproject.toml...")
+    print("📝 Gerando configurações para Ruff, Mypy e Pytest no pyproject.toml...")
 
     try:
         pyproject_content = PYPROJECT_TOML_PATH.read_text(encoding="utf-8")
@@ -89,6 +89,13 @@ strict_optional = true
 strict_equality = true
 """
 
+    if "[tool.pytest.ini_options]" not in pyproject_content:
+        config_to_add += """
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=."
+"""
+
     if config_to_add:
         try:
             with PYPROJECT_TOML_PATH.open("a", encoding="utf-8") as f:
@@ -96,7 +103,7 @@ strict_equality = true
         except (OSError, PermissionError) as e:
             _handle_error(f"Não foi possível escrever no arquivo pyproject.toml: {e}")
     else:
-        print("✅ Configurações de Ruff e Mypy já existem no pyproject.toml.")
+        print("✅ Configurações de Ruff, Mypy e Pytest já existem no pyproject.toml.")
 
 
 def _generate_pre_commit_config() -> None:
@@ -132,6 +139,12 @@ repos:
     rev: '2.3.5'
     hooks:
       - id: safety
+
+  - repo: https://github.com/returntocorp/semgrep
+    rev: 'v1.17.1'
+    hooks:
+      - id: semgrep
+        args: ['--config=p/python']
 """
     try:
         PRE_COMMIT_CONFIG_PATH.write_text(config_content, encoding="utf-8")
@@ -160,7 +173,10 @@ def _add_dependencies() -> None:
     _run_command(["poetry", "add"] + prod_deps)
 
     print("🔧 Adicionando dependências de desenvolvimento...")
-    dev_deps = ["ruff", "mypy", "bandit", "safety", "pre-commit"]
+    dev_deps = [
+        "ruff", "mypy", "bandit", "safety", "pre-commit",
+        "pytest", "pytest-cov", "py-spy", "semgrep"
+    ]
     _run_command(["poetry", "add", "--group", "dev"] + dev_deps)
 
 
